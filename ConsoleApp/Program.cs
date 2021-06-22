@@ -12,7 +12,6 @@ namespace ConsoleApp
 
         private static readonly ArticleValidator _articleValidator = new ArticleValidator();
 
-
         static void Main(string[] args)
         {
             Console.WriteLine("*-* Fluent Validation DEMO *-*");

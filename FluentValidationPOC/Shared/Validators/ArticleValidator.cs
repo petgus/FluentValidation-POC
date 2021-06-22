@@ -8,6 +8,9 @@ namespace FluentValidationPOC.Shared.Validators
     {
 
 
+        /*
+         * A simple validator
+         */
         public ArticleValidator()
         {
             RuleFor(x => x.Name).NotEmpty().When(x => x.Status == ArticleStatus.ReadyForWeb); // Must have name when in status ready for web
@@ -15,6 +18,11 @@ namespace FluentValidationPOC.Shared.Validators
             RuleFor(x => x.Status).NotNull();
         }
 
+
+
+        /*
+         * Adding a custom message & Regex rule
+         */
         //public ArticleValidator()
         //{
         //    RuleFor(x => x.Name).NotEmpty().When(x => x.Status == ArticleStatus.ReadyForWeb)
@@ -27,8 +35,12 @@ namespace FluentValidationPOC.Shared.Validators
 
 
 
+        /*
+         * Adding Localization and Async validation
+         * 
+         * Note! The ConsoleApp is not configured to use this validator. Will only work in the Blazor example 
+         */
 
-        // Demo this using MudBlazor        
         //private readonly ISkumArticleService _skumArticleService;
 
         //public ArticleValidator(IStringLocalizer<Article> localizer, ISkumArticleService skumArticleService)
@@ -41,7 +53,8 @@ namespace FluentValidationPOC.Shared.Validators
         //    RuleFor(x => x.ArticleNumber)
         //        .Matches(@"^\d{4}-\d{3}-\d{4}$")
         //        .NotEmpty().When(x => x.Status != ArticleStatus.Discontinued)
-        //        .MustAsync(async (articleNumber, cancellation) => {
+        //        .MustAsync(async (articleNumber, cancellation) =>
+        //        {
         //            bool isAvailable = await _skumArticleService.IsArticleNumberAvailableAsync(articleNumber);
         //            return isAvailable;
         //        }).WithMessage($"Article number is already taken");
