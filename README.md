@@ -2,7 +2,9 @@
  Trying out FluentValidation\
  Here's the validator implementation
  [ArticleValidator](FluentValidationPOC/Shared/Validators/ArticleValidator.cs)
- 
+
+![Screenshot](./git-images/blazor-form.jpg)
+
 ## Test using ConsoleApp
 `dotnet run --project ConsoleApp/ConsoleApp.csproj`
 
@@ -11,7 +13,6 @@ Dependencies
 - [MudBlazor](https://mudblazor.com/)
 - [Blazored FluentValidation](https://github.com/Blazored/FluentValidation)
 
-### Example using Blazor
  1. Start the site
 `dotnet run --project FluentValidationPOC/Server/FluentValidationPOC.Server.csproj`
 
