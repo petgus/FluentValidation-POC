@@ -1,14 +1,19 @@
 ﻿@inherits LayoutComponentBase
 <MudThemeProvider Theme="CustomMudBlazorTheme" />
+<MudSnackbarProvider />
 
 <MudLayout>
     <MudAppBar Elevation="1">
+        <MudMenu Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit">
+            <MudMenuItem Link="/">Article validation</MudMenuItem>
+            <MudMenuItem Link="/user">User validation</MudMenuItem>
+        </MudMenu>
         <MudText Typo="Typo.h5" Class="ml-3">Fluent Validation P.O.C.</MudText>
-        <MudSpacer />
-        <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" />
     </MudAppBar>
-    <MudMainContent Class="d-flex align-center justify-center mud-full-width" Style="padding-top:200px;">
-        @Body
+    <MudMainContent>
+        <MudContainer Class="mt-16" MaxWidth="MaxWidth.Medium">
+            @Body
+        </MudContainer>
     </MudMainContent>
 </MudLayout>
 

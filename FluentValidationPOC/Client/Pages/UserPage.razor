@@ -1,0 +1,109 @@
+﻿@page "/user"
+@inject ISnackbar Snackbar
+
+<MudGrid Justify="Justify.Center" Class="mt-md-16">
+
+    <MudItem xs="12" sm="6">
+        <EditForm Model="@swedishUser" @onchange="@(() => { StateHasChanged(); })" OnValidSubmit="@SubmitValidRegisterForm">
+            <FluentValidationValidator />
+
+            <MudCard Style="width:30em">
+                <MudCardContent>
+                    <MudText Typo="Typo.subtitle1">Create account</MudText>
+
+                    <MudTextField  @bind-Value="swedishUser.Username" Label="Username" Placeholder="Your e-mail adress" For="() => swedishUser.Username" />
+
+                    <MudTextField InputType="InputType.Password" @bind-Value="swedishUser.Password" Label="Password" For="() => swedishUser.Password" />
+
+                    <MudTextField InputType="InputType.Password" @bind-Value="swedishUser.PasswordConfirmation" Label="Confirm password" For="() => swedishUser.PasswordConfirmation" />
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Register</MudButton>
+                </MudCardActions>
+            </MudCard>
+
+        </EditForm>
+    </MudItem>
+
+    <MudItem xs="12" sm="6">
+        <MudCard Style="width:30em;">
+            <MudCardContent>
+                <MudText Typo="Typo.subtitle1">User JSON</MudText>
+                <pre>
+                <code>
+                        @System.Text.Json.JsonSerializer.Serialize(swedishUser, jsonOptions)
+                    </code>
+                </pre>
+                @*<div class="pt-4"><strong>Tip!</strong><br /> Try adding this article number in the form: <br /><span style="display:inline-block; background-color:#ddd; padding:5px; margin:5px 0;">@FluentValidationPOC.Shared.Services.TakenArticleNumber.Value</span></div>*@
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+
+</MudGrid>
+
+<MudGrid Justify="Justify.Center">
+
+    <MudItem xs="12" sm="6">
+
+        <EditForm Model="@swedishUser" @onchange="@(() => { StateHasChanged(); })" OnValidSubmit="@SubmitValidAddressForm">
+            <FluentValidationValidator />
+
+            <MudCard Style="width:30em">
+                <MudCardContent>
+                    <MudText Typo="Typo.subtitle1">Address <img src="/images/sweden.png" style="float: right;" /></MudText>
+
+                    <MudTextField @bind-Value="swedishUser.Address.Street" Label="Street" For="() => swedishUser.Address.Street" />
+
+                    <MudTextField @bind-Value="swedishUser.Address.Postcode" Label="Postcode" For="() => swedishUser.Address.Postcode" />
+
+                    <MudTextField @bind-Value="swedishUser.Address.Town" Label="Town" For="() => swedishUser.Address.Town" />
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Save</MudButton>
+                </MudCardActions>
+            </MudCard>
+
+        </EditForm>
+    </MudItem>
+
+    <MudItem xs="12" sm="6">
+        <EditForm Model="@norweiganUser" @onchange="@(() => { StateHasChanged(); })" OnValidSubmit="@SubmitValidAddressForm" >
+            <FluentValidationValidator />
+
+            <MudCard Style="width:30em">
+                <MudCardContent>
+                    <MudText Typo="Typo.subtitle1">Address <img src="/images/norway.png" style="float: right;" /></MudText>
+
+                    <MudTextField @bind-Value="norweiganUser.Address.Street" Label="Street" For="() => norweiganUser.Address.Street" />
+
+                    <MudTextField @bind-Value="norweiganUser.Address.Postcode" Label="Postcode" For="() => norweiganUser.Address.Postcode" />
+
+                    <MudTextField @bind-Value="norweiganUser.Address.Town" Label="Town" For="() => norweiganUser.Address.Town" />
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Save</MudButton>
+                </MudCardActions>
+            </MudCard>
+
+        </EditForm>
+    </MudItem>
+</MudGrid>
+@code{
+
+    User swedishUser = new User { Address = new Address { Country = Country.Sweden} };
+    User norweiganUser = new User { Address = new Address { Country = Country.Norway } };
+
+    System.Text.Json.JsonSerializerOptions jsonOptions = new System.Text.Json.JsonSerializerOptions() { WriteIndented = true };
+
+
+    void SubmitValidRegisterForm()
+    {
+        Snackbar.Add("User account created", Severity.Success);
+    }
+
+    void SubmitValidAddressForm()
+    {
+        Snackbar.Add("Address updated", Severity.Success);
+    }
+
+}

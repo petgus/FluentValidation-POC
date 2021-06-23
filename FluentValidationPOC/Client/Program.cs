@@ -5,6 +5,10 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using FluentValidationPOC.Shared.Services;
+using FluentValidationPOC.Shared.Validators.ArticleValidators;
+using FluentValidationPOC.Shared.Validators.UserValidators;
+using FluentValidation;
+using FluentValidationPOC.Shared.Models;
 
 namespace FluentValidationPOC.Client
 {
@@ -21,6 +25,8 @@ namespace FluentValidationPOC.Client
 
             builder.Services.AddSingleton<ISkumArticleService, SkumArticleService>();
 
+            builder.Services.AddTransient<IValidator<Article>, LocalizedAsyncArticleValidator>();
+            builder.Services.AddTransient<IValidator<User>, UserValidator>();
 
             await builder.Build().RunAsync();
         }

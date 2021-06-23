@@ -1,4 +1,4 @@
-﻿namespace FluentValidationPOC.Shared
+﻿namespace FluentValidationPOC.Shared.Models
 {
     public class Article
     {

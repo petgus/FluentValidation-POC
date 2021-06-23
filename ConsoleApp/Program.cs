@@ -1,6 +1,9 @@
 ﻿using ConsoleTableExt;
-using FluentValidationPOC.Shared;
-using FluentValidationPOC.Shared.Validators;
+using FluentValidation;
+using FluentValidation.Results;
+using FluentValidationPOC.Shared.Models;
+using FluentValidationPOC.Shared.Validators.ArticleValidators;
+using FluentValidationPOC.Shared.Validators.UserValidators;
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -9,13 +12,26 @@ namespace ConsoleApp
 {
     class Program
     {
-
-        private static readonly ArticleValidator _articleValidator = new ArticleValidator();
-
         static void Main(string[] args)
         {
             Console.WriteLine("*-* Fluent Validation DEMO *-*");
+
             //CultureInfo.CurrentUICulture = new CultureInfo("sv-SE");
+
+            ValidateArticles();
+            ValidateUsers();
+
+            Console.Write("\n\n\n\n\n\n\n\n\n\n");
+        }
+
+
+
+        private static void ValidateArticles()
+        {
+            // Switch Validator implementation by commenting out validators here...
+            //var articleValidator = new SimpleArticleValidator();
+            var articleValidator = new ArticleValidator();
+
 
 
             Article article1 = new();
@@ -42,30 +58,53 @@ namespace ConsoleApp
             };
 
 
-            ValidateAndPrintResult(article1);
-            ValidateAndPrintResult(article2);
-            ValidateAndPrintResult(article3);
-            ValidateAndPrintResult(article4);
-
-
-            Console.Write("\n\n\n\n\n\n\n\n\n\n");
+            ValidateAndPrintResult( articleValidator.Validate(article1), article1 );
+            ValidateAndPrintResult( articleValidator.Validate(article2), article2 );
+            ValidateAndPrintResult( articleValidator.Validate(article3), article3 );
+            ValidateAndPrintResult( articleValidator.Validate(article4), article4 );
         }
 
 
 
-
-
-        private static void ValidateAndPrintResult(Article article)
+        private static void ValidateUsers()
         {
-            Info($"\n\n\n{JsonSerializer.Serialize(article, jsonSerializerOptions)}");
+            var userValidator = new UserValidator();
+            User user = new()
+            {
+                Username = "username",
+                Password = null,
+                Address = new Address
+                {
+                    Street = "Storgatan 1",
+                    Postcode = "1234",
+                    Town = "Storstan",
+                    Country = Country.Sweden
+                }
+            };
+
+            ValidateAndPrintResult(userValidator.Validate(user), user);
+
+            // Fix username
+            user.Username = "rick@WubbaLubbaDubDub.com";
+
+            Console.WriteLine("| Swedish address validation |");
+            ValidateAndPrintResult(userValidator.Validate(user), user);
+
+            user.Address.Country = Country.Norway;
+            Console.WriteLine("| Norweigan address validation |");
+            ValidateAndPrintResult(userValidator.Validate(user), user);
+        }
 
 
-            // Validate article
-            var validationResult = _articleValidator.Validate(article);
+        #region utils
+
+        private static void ValidateAndPrintResult<T>(ValidationResult validationResult, T objectToValidate)
+        {
+            Info($"\n{JsonSerializer.Serialize(objectToValidate, jsonSerializerOptions)}");
 
             if (validationResult.IsValid)
             {
-                Success("Article is valid!");
+                Success("Object is valid!");
             }
             else
             {
@@ -75,11 +114,10 @@ namespace ConsoleApp
                     .From(validationResult.Errors)
                     .ExportAndWriteLine();
             }
+
+            Console.WriteLine("\n\n\n");
         }
 
-
-
-        #region utils
 
         static JsonSerializerOptions jsonSerializerOptions =
             new JsonSerializerOptions

@@ -1,46 +1,53 @@
 ﻿@page "/"
+@inject ISnackbar Snackbar
 
 
+<MudGrid Justify="Justify.Center" Class="mt-md-16">
 
-<EditForm Model="@newArticle" @onchange="@(() => { StateHasChanged(); })" OnValidSubmit="@SubmitValidForm">
-    <FluentValidationValidator />
+    <MudItem xs="12" sm="6">
+        <EditForm Model="@newArticle" @onchange="@(() => { StateHasChanged(); })" OnValidSubmit="@SubmitValidForm">
+            <FluentValidationValidator DisableAssemblyScanning="true"/>
 
-    <MudCard Style="width:30em">
-        <MudCardContent>
-            <MudText Typo="Typo.subtitle1">Form validation</MudText>
+            <MudCard Style="width:30em">
+                <MudCardContent>
+                    <MudText Typo="Typo.subtitle1">Form validation</MudText>
 
-            <MudTextField @bind-Value="newArticle.ArticleNumber" Label="Article number" For="() => newArticle.ArticleNumber" />
+                    <MudTextField @bind-Value="newArticle.ArticleNumber" Label="Article number" For="() => newArticle.ArticleNumber" />
 
-            <MudTextField @bind-Value="newArticle.Name" Label="Name" For="() => newArticle.Name" />
+                    <MudTextField @bind-Value="newArticle.Name" Label="Name" For="() => newArticle.Name" />
 
-            <MudSelect Label="Status" @bind-Value="newArticle.Status" For="() => newArticle.Status">
-                @foreach (var status in Enum.GetValues(typeof(ArticleStatus)))
-                {
-                    <MudSelectItem T="ArticleStatus" Value="@((ArticleStatus) status)">@status</MudSelectItem>
-                }
-            </MudSelect>
+                    <MudSelect Label="Status" @bind-Value="newArticle.Status" For="() => newArticle.Status">
+                        @foreach (var status in Enum.GetValues(typeof(ArticleStatus)))
+                        {
+                            <MudSelectItem T="ArticleStatus" Value="@((ArticleStatus) status)">@status</MudSelectItem>
+                        }
+                    </MudSelect>
 
-        </MudCardContent>
-        <MudCardActions>
+                </MudCardContent>
+                <MudCardActions>
 
-            @*<ValidationSummary />*@
-            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Save</MudButton>
-        </MudCardActions>
-    </MudCard>
+                    @*<ValidationSummary />*@
+                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Save</MudButton>
+                </MudCardActions>
+            </MudCard>
 
-</EditForm>
-
-<MudCard Style="width:30em; margin-left:20px">
-    <MudCardContent>
-        <MudText Typo="Typo.subtitle1">Article JSON</MudText>
-        <pre>
-        <code>
+        </EditForm>
+    </MudItem>
+    <MudItem xs="12" sm="6">
+        <MudCard Style="width:30em; margin-left:20px">
+            <MudCardContent>
+                <MudText Typo="Typo.subtitle1">Article JSON</MudText>
+                <pre>
+                <code>
             @System.Text.Json.JsonSerializer.Serialize(newArticle, jsonOptions)
         </code>
         </pre>
-    </MudCardContent>
-</MudCard>
 
+                <div class="pt-4"><strong>Tip!</strong><br /> Try adding this article number in the form: <br /><span style="display:inline-block; background-color:#ddd; padding:5px; margin:5px 0;">@FluentValidationPOC.Shared.Services.TakenArticleNumber.Value</span></div>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+</MudGrid>
 @code{
 
     Article newArticle = new Article();
@@ -49,7 +56,6 @@
 
     void SubmitValidForm()
     {
-        Console.WriteLine("Form Submitted Successfully!");
+        Snackbar.Add("Form Submitted Successfully!", Severity.Success);
     }
-
 }
