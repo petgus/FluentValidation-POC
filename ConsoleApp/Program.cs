@@ -28,11 +28,9 @@ namespace ConsoleApp
 
         private static void ValidateArticles()
         {
-            // Switch Validator implementation by commenting out validators here...
-            //var articleValidator = new SimpleArticleValidator();
-            var articleValidator = new ArticleValidator();
+            var articleValidator = new SimpleArticleValidator();
 
-
+            //var articleValidator = new ArticleValidator();
 
             Article article1 = new();
 
@@ -52,16 +50,9 @@ namespace ConsoleApp
             };
 
 
-            Article article4 = new()
-            {
-                Status = ArticleStatus.ReadyForWeb
-            };
-
-
             ValidateAndPrintResult( articleValidator.Validate(article1), article1 );
             ValidateAndPrintResult( articleValidator.Validate(article2), article2 );
             ValidateAndPrintResult( articleValidator.Validate(article3), article3 );
-            ValidateAndPrintResult( articleValidator.Validate(article4), article4 );
         }
 
 
