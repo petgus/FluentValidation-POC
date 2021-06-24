@@ -17,19 +17,4 @@
     <ProjectReference Include="..\Shared\FluentValidationPOC.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Resources\ValidationMessages.sv.Designer.cs">
-      <DependentUpon>ValidationMessages.sv.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="Resources\ValidationMessages.sv.resx">
-      <LastGenOutput>ValidationMessages.sv.Designer.cs</LastGenOutput>
-      <Generator>ResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-
 </Project>

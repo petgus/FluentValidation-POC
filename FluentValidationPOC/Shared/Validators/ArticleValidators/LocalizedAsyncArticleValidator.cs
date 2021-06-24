@@ -20,7 +20,7 @@ namespace FluentValidationPOC.Shared.Validators.ArticleValidators
             _skumArticleService = skumArticleService;
 
             RuleFor(x => x.Name).NotEmpty().When(x => x.Status == ArticleStatus.ReadyForWeb)
-                .WithMessage(x => string.Format(localizer["Name required when status is ReadyForWeb"], ArticleStatus.ReadyForWeb));
+                .WithMessage(x => localizer["Name required when status is ReadyForWeb", ArticleStatus.ReadyForWeb]);
 
             RuleFor(x => x.ArticleNumber)
                 .NotEmpty().When(x => x.Status != ArticleStatus.Discontinued)

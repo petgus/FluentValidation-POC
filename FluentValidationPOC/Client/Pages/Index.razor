@@ -1,12 +1,11 @@
 ﻿@page "/"
 @inject ISnackbar Snackbar
 
-
 <MudGrid Justify="Justify.Center" Class="mt-md-16">
 
     <MudItem xs="12" sm="6">
         <EditForm Model="@newArticle" @onchange="@(() => { StateHasChanged(); })" OnValidSubmit="@SubmitValidForm">
-            <FluentValidationValidator DisableAssemblyScanning="true"/>
+            <FluentValidationValidator />
 
             <MudCard Style="width:30em">
                 <MudCardContent>

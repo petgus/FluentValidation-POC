@@ -1,14 +1,14 @@
+using FluentValidation;
+using FluentValidationPOC.Shared.Models;
+using FluentValidationPOC.Shared.Services;
+using FluentValidationPOC.Shared.Validators.ArticleValidators;
+using FluentValidationPOC.Shared.Validators.UserValidators;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using MudBlazor.Services;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using FluentValidationPOC.Shared.Services;
-using FluentValidationPOC.Shared.Validators.ArticleValidators;
-using FluentValidationPOC.Shared.Validators.UserValidators;
-using FluentValidation;
-using FluentValidationPOC.Shared.Models;
 
 namespace FluentValidationPOC.Client
 {

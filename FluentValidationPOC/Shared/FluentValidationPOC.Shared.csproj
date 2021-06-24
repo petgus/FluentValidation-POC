@@ -12,4 +12,20 @@
   <ItemGroup>
     <SupportedPlatform Include="browser" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\Models.Article.sv.Designer.cs">
+      <DependentUpon>Models.Article.sv.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Models.Article.sv.resx">
+      <SubType>Designer</SubType>
+      <LastGenOutput>Models.Article.sv.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>

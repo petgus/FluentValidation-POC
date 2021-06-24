@@ -5,6 +5,7 @@ using FluentValidationPOC.Shared.Models;
 using FluentValidationPOC.Shared.Validators.ArticleValidators;
 using FluentValidationPOC.Shared.Validators.UserValidators;
 using System;
+using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -19,7 +20,8 @@ namespace ConsoleApp
             //CultureInfo.CurrentUICulture = new CultureInfo("sv-SE");
 
             ValidateArticles();
-            ValidateUsers();
+
+            //ValidateUsers();
 
             Console.Write("\n\n\n\n\n\n\n\n\n\n");
         }
