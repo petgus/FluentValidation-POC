@@ -1,5 +1,5 @@
 # FluentValidation POC
-Trying out [FluentValidation](https://docs.fluentvalidation.net/)\
+Trying out [FluentValidation](https://docs.fluentvalidation.net/)
 
 Here's the [validators in this repo](FluentValidationPOC/Shared/Validators)
 
