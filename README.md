@@ -1,7 +1,6 @@
 # FluentValidation POC
- Trying out FluentValidation\
- Here's the validator implementation
- [ArticleValidator](FluentValidationPOC/Shared/Validators/ArticleValidator.cs)
+Trying out FluentValidation\
+Here's the [validators in this repo](FluentValidationPOC/Shared/Validators)
 
 ![Screenshot](./git-images/blazor-form.jpg)
 
