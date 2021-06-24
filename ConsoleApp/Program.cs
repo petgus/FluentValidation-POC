@@ -72,27 +72,24 @@ namespace ConsoleApp
             User user = new()
             {
                 Username = "username",
-                Password = null,
                 Address = new Address
                 {
                     Street = "Storgatan 1",
                     Postcode = "1234",
-                    Town = "Storstan",
+                    Town = string.Empty,
                     Country = Country.Sweden
                 }
             };
 
-            ValidateAndPrintResult(userValidator.Validate(user), user);
-
-            // Fix username
-            user.Username = "rick@WubbaLubbaDubDub.com";
-
             Console.WriteLine("| Swedish address validation |");
-            ValidateAndPrintResult(userValidator.Validate(user), user);
+            ValidateAndPrintResult( userValidator.Validate(user), user );
 
             user.Address.Country = Country.Norway;
             Console.WriteLine("| Norweigan address validation |");
-            ValidateAndPrintResult(userValidator.Validate(user), user);
+            ValidateAndPrintResult (userValidator.Validate(user), user );
+
+            Console.WriteLine("| Password validation |");
+            ValidateAndPrintResult(userValidator.Validate(user, options => options.IncludeRuleSets("Password")), user);
         }
 
 
