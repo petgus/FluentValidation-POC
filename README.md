@@ -1,5 +1,6 @@
 # FluentValidation POC
-Trying out FluentValidation\
+Trying out [FluentValidation](https://docs.fluentvalidation.net/)\
+
 Here's the [validators in this repo](FluentValidationPOC/Shared/Validators)
 
 ![Screenshot](./git-images/blazor-form.jpg)
